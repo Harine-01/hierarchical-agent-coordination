@@ -4,6 +4,7 @@ from app.database.crud import (
     create_onboarding_tasks
 )
 
+from app.agents.supervisor import create_onboarding_plan
 
 def start_onboarding(
     db,
@@ -29,9 +30,13 @@ def start_onboarding(
         employee_id=employee["employee_id"]
     )
 
-    tasks = create_onboarding_tasks(
+    tasks = create_onboarding_plan(
+    workflow_id=workflow["workflow_id"]
+    )
+
+    create_onboarding_tasks(
         db=db,
-        workflow_id=workflow["workflow_id"]
+        tasks=tasks
     )
 
     return {

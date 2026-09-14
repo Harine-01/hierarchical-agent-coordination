@@ -1,6 +1,5 @@
 import uuid
 
-
 def create_employee(
     db,
     employee_id: str,
@@ -15,7 +14,7 @@ def create_employee(
         "employee_name": employee_name,
         "department": department,
         "designation": designation,
-        "joining_date": joining_date,
+        "joining_date": joining_date.isoformat(),
         "email": email
     }
 
@@ -50,8 +49,11 @@ def create_workflow(
 
 def create_onboarding_tasks(
     db,
-    workflow_id: str
+    tasks
 ):
+    db.tasks.insert_many(tasks)
+
+    return tasks
     hr_task_id = str(uuid.uuid4())
 
     tasks = [
