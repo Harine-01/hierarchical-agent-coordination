@@ -1,15 +1,10 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from pymongo import MongoClient
 
-DATABASE_URL = "sqlite:///./onboarding.db"
+MONGO_URL = "mongodb://localhost:27017/"
 
-engine = create_engine(
-    DATABASE_URL,
-    connect_args={"check_same_thread": False}
-)
+client = MongoClient(MONGO_URL)
 
-SessionLocal = sessionmaker(
-    autocommit=False,
-    autoflush=False,
-    bind=engine
-)
+db = client["employee_onboarding"]
+
+def get_database():
+    return db

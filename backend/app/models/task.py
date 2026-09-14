@@ -1,25 +1,22 @@
-from sqlalchemy import Column, String, DateTime, ForeignKey
 from datetime import datetime
 
-from app.database.base import Base
 
-
-class Task(Base):
-    __tablename__ = "tasks"
-
-    task_id = Column(String, primary_key=True, index=True)
-
-    workflow_id = Column(
-        String,
-        ForeignKey("workflows.workflow_id"),
-        nullable=False
-    )
-
-    task_name = Column(String, nullable=False)
-    assigned_agent = Column(String, nullable=False)
-    status = Column(String, default="PENDING")
-    depends_on = Column(String, nullable=True)
-
-    created_at = Column(DateTime, default=datetime.utcnow)
-    started_at = Column(DateTime, nullable=True)
-    completed_at = Column(DateTime, nullable=True)
+class Task:
+    def __init__(
+        self,
+        task_id: str,
+        workflow_id: str,
+        task_name: str,
+        assigned_agent: str,
+        status: str = "PENDING",
+        depends_on: str = None
+    ):
+        self.task_id = task_id
+        self.workflow_id = workflow_id
+        self.task_name = task_name
+        self.assigned_agent = assigned_agent
+        self.status = status
+        self.depends_on = depends_on
+        self.created_at = datetime.utcnow()
+        self.started_at = None
+        self.completed_at = None

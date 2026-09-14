@@ -9,12 +9,11 @@ __pycache__/
 # Environment variables
 .env
 
-# Local SQLite database
-*.db
-
 # VS Code
 .vscode/
 
 # OS files
 .DS_Store
 Thumbs.db
+
+*.db

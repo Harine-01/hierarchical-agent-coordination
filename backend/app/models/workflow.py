@@ -1,19 +1,17 @@
-from sqlalchemy import Column, String, DateTime, ForeignKey
 from datetime import datetime
 
-from app.database.base import Base
 
-
-class Workflow(Base):
-    __tablename__ = "workflows"
-
-    workflow_id = Column(String, primary_key=True, index=True)
-    employee_id = Column(
-        String,
-        ForeignKey("employees.employee_id"),
-        nullable=False
-    )
-    workflow_type = Column(String, nullable=False)
-    status = Column(String, default="PENDING")
-    created_at = Column(DateTime, default=datetime.utcnow)
-    completed_at = Column(DateTime, nullable=True)
+class Workflow:
+    def __init__(
+        self,
+        workflow_id: str,
+        employee_id: str,
+        workflow_type: str,
+        status: str = "PENDING"
+    ):
+        self.workflow_id = workflow_id
+        self.employee_id = employee_id
+        self.workflow_type = workflow_type
+        self.status = status
+        self.created_at = datetime.utcnow()
+        self.completed_at = None

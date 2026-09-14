@@ -1,5 +1,3 @@
-from sqlalchemy.orm import Session
-
 from app.database.crud import (
     create_employee,
     create_workflow,
@@ -8,7 +6,7 @@ from app.database.crud import (
 
 
 def start_onboarding(
-    db: Session,
+    db,
     employee_id: str,
     employee_name: str,
     department: str,
@@ -28,12 +26,12 @@ def start_onboarding(
 
     workflow = create_workflow(
         db=db,
-        employee_id=employee.employee_id
+        employee_id=employee["employee_id"]
     )
 
     tasks = create_onboarding_tasks(
         db=db,
-        workflow_id=workflow.workflow_id
+        workflow_id=workflow["workflow_id"]
     )
 
     return {
